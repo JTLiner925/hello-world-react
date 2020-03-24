@@ -10,22 +10,52 @@
   <body>
     <div id="application-root"></div>
 
-    
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <!--A React node is defined as:
 a light, stateless, immutable, virtual representation 
 of a DOM node. -->
-    <script>
+    <script type="text/babel">
       
       const appRoot = document.querySelector("#application-root");
       //ReactDOM.render(element, container);
       // ReactDOM.render('Hello, world!', appRoot);
       
       //React.createElement(type, props, children)
-      const helloWorldH1 = React.createElement("h1", null, "Hello, world!");
+      // without babel const helloWorldH1 = React.createElement("h1", null, "Hello, world!");
+      const helloWorldH1 = <h1>Hello, world!</h1>;
+
+      // ReactDOM.render(helloWorldH1, appRoot);
       
-      ReactDOM.render(helloWorldH1, appRoot);
+  //     ReactDOM.render(
+  //   <div>
+  //     <h1>Hello, world!</h1>
+  //     <p>How are you today?</p>
+  //     <h2>Look what React can do!</h2>
+  //   </div>,
+  //   document.querySelector('#application-root')
+  // );
+  function App(props) {
+    console.log(props)
+  return (
+    <header>
+      {props.children}
+      
+    </header>
+  )
+  //<!--My App--> 
+  //<span id='app-id' className={props.className}>My App</span>;
+}
+// Note: we had to use curly braces instead of quotes as 
+//the className value is a variable, props.className.
+// Nested elements inside the App
+ReactDOM.render(
+  <App className='my-class'>
+    <h1>Current Page Title!</h1>
+  </App>,
+  document.querySelector('#application-root')
+);
     </script>
   </body>
 </html>
